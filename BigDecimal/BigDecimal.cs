@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
@@ -355,6 +356,15 @@ namespace ExtendedNumerics
 
 		#region Equals
 
+		public bool Equals(BigDecimal other)
+		{
+			if (!Sign.Equals(other.Sign)) return false;
+
+			if (Exponent.Equals(other.Exponent)) return Mantissa.Equals(other.Mantissa);
+
+			return GetWholePart().Equals(other.GetWholePart());
+		}
+
 		public Boolean Equals(BigDecimal? other) => Equals(this, other);
 
 		/// <summary>
@@ -408,6 +418,8 @@ namespace ExtendedNumerics
 		/// <returns>True if the two numbers are equal, up to <paramref name="precision"/>.</returns>
 		public static Boolean Equals(BigDecimal? left, BigDecimal? right, int precision)
 		{
+			Console.WriteLine("Equals");
+
 			if (left == null || right == null)
 			{
 				return (left == null && right == null);
@@ -827,6 +839,8 @@ namespace ExtendedNumerics
 
 		/// <summary>Returns a value that indicates whether a <see cref="BigDecimal"/> value is greater than or equal to another <see cref="BigDecimal"/> value.</summary>
 		public static Boolean operator >=(BigDecimal left, BigDecimal right) => left.Exponent > right.Exponent ? AlignExponent(left, right) >= right.Mantissa : left.Mantissa >= AlignExponent(right, left);
+
+		//public static bool operator ==(BigDecimal left, BigDecimal right) => left.Equals(right);
 
 		#endregion
 
