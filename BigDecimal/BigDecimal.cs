@@ -418,8 +418,6 @@ namespace ExtendedNumerics
 		/// <returns>True if the two numbers are equal, up to <paramref name="precision"/>.</returns>
 		public static Boolean Equals(BigDecimal? left, BigDecimal? right, int precision)
 		{
-			Console.WriteLine("Equals");
-
 			if (left == null || right == null)
 			{
 				return (left == null && right == null);
@@ -839,8 +837,6 @@ namespace ExtendedNumerics
 
 		/// <summary>Returns a value that indicates whether a <see cref="BigDecimal"/> value is greater than or equal to another <see cref="BigDecimal"/> value.</summary>
 		public static Boolean operator >=(BigDecimal left, BigDecimal right) => left.Exponent > right.Exponent ? AlignExponent(left, right) >= right.Mantissa : left.Mantissa >= AlignExponent(right, left);
-
-		//public static bool operator ==(BigDecimal left, BigDecimal right) => left.Equals(right);
 
 		#endregion
 
