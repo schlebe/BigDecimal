@@ -361,7 +361,14 @@ namespace ExtendedNumerics
 
 			if (Exponent.Equals(other.Exponent)) return Mantissa.Equals(other.Mantissa);
 
-			return GetWholePart().Equals(other.GetWholePart());
+			if (Exponent > other.Exponent)
+			{
+				return (AlignExponent(this, other) == other.Mantissa);
+			}
+			else
+			{
+				return (Mantissa == AlignExponent(other, this));
+			}
 		}
 
 		public Boolean Equals(BigDecimal? other) => Equals(this, other);
